@@ -57,7 +57,8 @@ def fetch(link, last=None):
 def format_html(data):
     """Very basic formatting. Title+image+link in center one after ."""
     h = escape_html
-    res = [html_tmpl.format(h(e[6]), h(e[5])) for e in data]
+    res = '<head><meta charset="utf-8"></head>' #yep, even here
+    res += [html_tmpl.format(h(e[6]), h(e[5])) for e in data]
     res = u'\n'.join(res)
     return res
 
