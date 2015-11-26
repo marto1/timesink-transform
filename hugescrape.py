@@ -62,15 +62,24 @@ def format_html(data):
     res = u'\n'.join(res)
     return res
 
-def format_csv(data):
+def format_csv(data): #FIXME quoting
     u = unicode
     res = [u'{0}, {1}'.format(u(e[5]),
                               u(e[6])) for e in data]
     res = u'\n'.join(res)
     return res
-    
+
+def format_sexp(data):
+    """ Pairs (link title) """
+    u = unicode
+    res = "("
+    resl = [u'("{0}" "{1}")'.format(u(e[5]),
+                               u(e[6])) for e in data]
+    res += u' '.join(resl) +")"
+    return res
 formats = {"csv": format_csv,
-           "html": format_html}
+           "html": format_html,
+           "sexp": format_sexp}
 
 def format_data(data, raw=False, format="csv"):
     if raw:
