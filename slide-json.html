@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <center>
+    <p id="main_title">init</p>
+    <p><a id="main_link" href="">init<a/></p>
+    <video id="main_video" src="" autoplay loop controls />
+  </center>
+  <script>
+    //place obtained data here !!!
+    var data = ;
+    var index_v = 0;
+function show_next_video(title, video, link) {
+    current = data[index_v];
+    title.innerHTML = current.title;
+    video.src = current.media;
+    link.innerHTML = current.media;
+    link.href = current.media;
+    if (index_v < (data.length-1)){
+	index_v++;
+    } else {
+	index_v = 0;
+    }
+}
+
+var main_timer = null;
+
+function main(reloadonend){
+    var delay = 100000;
+
+    if (data.length == 0){
+	return;
+    }
+    window.onkeydown = function(e) {
+	var key = e.keyCode ? e.keyCode : e.which;
+
+	if (key == 39) { //left
+	    show_next_video(document.getElementById("main_title"),
+			    document.getElementById("main_video"),
+			    document.getElementById("main_link"));
+	    clearInterval(main_timer);
+	    main_timer = window.setInterval(function() {
+		show_next_video(document.getElementById("main_title"),
+				document.getElementById("main_video"),
+				document.getElementById("main_link"));
+	    }, delay);
+	}
+    }
+    show_next_video(document.getElementById("main_title"),
+		    document.getElementById("main_video"),
+		    document.getElementById("main_link"));
+
+    main_timer = window.setInterval(function() {
+	show_next_video(document.getElementById("main_title"),
+			document.getElementById("main_video"),
+			document.getElementById("main_link"));
+    }, delay);
+    
+}
+main(false);
+</script>
+</body>
+</html>
