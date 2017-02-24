@@ -153,8 +153,18 @@ def filter_sound(entry):
     if entry["media"]: #TODO
         return True
 
+def filter_image(entry):
+    try:
+        m = entry['media']
+        return m.endswith(".jpg") or m.endswith(".png")
+    except KeyError:
+        return False
+
+
 filters= {"webm": filter_webm,
-          "sound": filter_sound}
+          "sound": filter_sound,
+          "image": filter_image,
+}
 
 ####END FILTERS
 

@@ -6,6 +6,7 @@ Faster sequential viewer for yuki.la chan archive.
 import requests
 from bs4 import BeautifulSoup
 import sys
+import os
 
 def extract_thread_entry(container):
     subject = container.find("span", attrs={"class": "subject"}).text
@@ -23,7 +24,7 @@ def create_thread_html(subject, content, image):
     result += u"</div>"
     return result
 
-def main(starturl):
+def main(starturl, count):
     #data = requests.get(starturl).text
 
     #writing
@@ -35,6 +36,9 @@ def main(starturl):
     f = open("site.html", "r")
     data = f.read().decode('utf8')
     f.close()
+
+    if not os.path.exists("threads"):
+        os.makedirs("threads")
 
     soup = BeautifulSoup(data, 'html.parser')
     result = u"<html><body>"
@@ -50,4 +54,4 @@ def main(starturl):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    main(sys.argv[1], int(sys.argv[2]))

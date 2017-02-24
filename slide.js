@@ -7,7 +7,7 @@ function hide(element, val) {
 }
 
 function main(reloadonend){
-    var delay = 2000;
+    var delay = 100000;
     var allSections = document.getElementsByTagName("section");
     var current = 0;
 
