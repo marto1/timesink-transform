@@ -160,10 +160,10 @@ def filter_image(entry):
     except KeyError:
         return False
 
-
-filters= {"webm": filter_webm,
-          "sound": filter_sound,
-          "image": filter_image,
+filters= {
+    "webm": filter_webm,
+    "sound": filter_sound,
+    "image": filter_image,
 }
 
 ####END FILTERS

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Freewall view</title>
+		<meta content="text/html; charset=utf-8" http-equiv="content-type">
+		<meta name="description" content="Freewall demo for image layout" />
+		<meta name="keywords" content="javascript, dynamic, grid, layout, jquery plugin, images layouts"/>
+		<link rel="icon" href="favicon.ico" type="freewall/image/x-icon" />
+		<link rel="stylesheet" type="text/css" href="freewall/css/style.css" />
+		<script type="text/javascript" src="freewall/js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="freewall/freewall.js"></script>
+		<script type="text/javascript" src="imagewall.js"></script>
+
+		<style type="text/css">
+			.free-wall {
+				margin: 15px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="freewall" class="free-wall"></div>
+
+		<script type="text/javascript">
+    String.prototype.endsWith = function(suffix) {
+	return this.indexOf(suffix, this.length - suffix.length) !== -1;
+    };
+			var temp = "<a href={ref} class='cell' style='width:{width}px; height: 100px; background-image: url({name})'></a>";
+var w = 1, html = '';
+ data.forEach(function(element) {
+     var link = element["media"];
+     w = 120 +  200 * Math.random() << 0;
+     var linkSmall = ''
+     linkSmall = link.replace(/\.jpg/g, "s.jpg").replace(/\.png/g, "s.jpg");
+     html += temp.replace(/\{width\}/g, w).replace("{name}", linkSmall).replace("{ref}", link);
+     console.log(linkSmall);
+});
+$("#freewall").html(html);
+
+			// var w = 1, html = '', limitItem = 49;
+			// for (var i = 0; i < limitItem; ++i) {
+			// 	html += temp.replace(/\{height\}/g, 200).replace(/\{width\}/g, w).replace("{name}", i + 1);
+			// }
+			// $("#freewall").html(html);
+
+			var wall = new Freewall("#freewall");
+			wall.reset({
+				selector: '.cell',
+				animate: true,
+				cellW: 20,
+				cellH: 200,
+				onResize: function() {
+					wall.fitWidth();
+				}
+			});
+			wall.fitWidth();
+			// for scroll bar appear;
+			$(window).trigger("resize");
+		</script>
+	</body>
+</html>
